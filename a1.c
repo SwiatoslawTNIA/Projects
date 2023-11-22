@@ -82,17 +82,6 @@ int checkLiters(int liters, int digit_is_true){
         }
         return liters;
     }
-    //  if(scanf("%d", &liters) != 1){//if it doesn't match the digit format;
-         
-    //         if(liters >= 1 && liters <= 1000){
-    //             return 1;
-    //         }else{
-    //             while(liters < 1 || liters > 1000){
-    //                 printf("Invalid input! Please choose a valid amount.\n");
-    //             }
-    //             return 1;
-    //         }
-    // }
     return 0;
 }
 
@@ -102,7 +91,7 @@ int chooseCanisters(int answer){
         printf("\nWhich size of canister would you like to use for your orange juice?\n");
         printf("- 5 litres\n- 10 litres\n- 20 litres\n > ");
         litersperCanister = scanCanAnswer(answer);
-    }else{//we could obviously skip this equality
+    }else{
         printf("\nWhich size of canister would you like to use for your apple juice?\n");
         printf("- 5 litres\n- 15 litres\n- 25 litres\n > ");
         litersperCanister =  scanCanAnswer(answer);
@@ -215,9 +204,9 @@ void confirmOrder(void){
                 printf("Thank you for using the juice filling machine calculator!\n");
                 is_true = 1;
             }else{
-            printf("Invalid input! Please choose a valid option.\n");
-            is_digit = scanf("%d", &answer);
-            cleanBuffer();
+                printf("Invalid input! Please choose a valid option.\n");
+                is_digit = scanf("%d", &answer);
+                cleanBuffer();
             }
         }else{
             printf("Invalid input! Please choose a valid option.\n");

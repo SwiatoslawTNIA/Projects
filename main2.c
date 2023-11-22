@@ -16,7 +16,7 @@ int scanCanAnswer(int answer);
 int costsCalc(int answer, int liters, int canisters, int canisterSize);
 void confirmOrder(void);
 void cleanBuffer(void);
-int main(){
+int main(void){
     int answer, liters, canistersize, canisters;
     greet();
     answer = chooseJuice();
@@ -30,7 +30,7 @@ void greet(void){
     printf("Welcome to the juice filling machine calculator!\n");
 }
 
-int chooseJuice(){
+int chooseJuice(void){
     int answer;
     printf("\nWhich juice do you want to fill?\n1. Orange juice\n2. Apple juice\n>");
     scanf("%d", &answer);
@@ -97,12 +97,12 @@ int checkLiters(int liters, int digit_is_true){
 }
 
 int chooseCanisters(int answer){
-    int litersperCanister;
+    int litersperCanister = 0;
     if(answer == 1){
         printf("\nWhich size of canister would you like to use for your orange juice?\n");
         printf("- 5 litres\n- 10 litres\n- 20 litres\n > ");
         litersperCanister = scanCanAnswer(answer);
-    }else if(answer == 2){//we could obviously skip this equality
+    }else{
         printf("\nWhich size of canister would you like to use for your apple juice?\n");
         printf("- 5 litres\n- 15 litres\n- 25 litres\n > ");
         litersperCanister =  scanCanAnswer(answer);
@@ -122,7 +122,7 @@ int scanCanAnswer(int answer){
        
         if(answer == 1){
             int array[3] = {5, 10, 20};
-            for(int i = 0; i < sizeof(array) / sizeof(array[0]); i++){
+            for(int i = 0; i < (int)(sizeof(array) / sizeof(array[0])); i++){
                 if(array[i] == canisterCapacity){
                     reply_is_true = 1;
                 }
@@ -134,7 +134,7 @@ int scanCanAnswer(int answer){
             }
         }else if(answer == 2){
             int array[3] = {5, 15, 25};
-            for(int i = 0; i < sizeof(array) / sizeof(array[0]); i++){
+            for(int i = 0; i < (int)(sizeof(array) / sizeof(array[0])); i++){
                 if(array[i] == canisterCapacity){
                     reply_is_true = 1;
                 }
@@ -152,7 +152,7 @@ int scanCanAnswer(int answer){
 }
 
 int evalCanisterQuantity(int liters, int canistersize){
-    int fullcanisters, leftover, result;
+    int fullcanisters, leftover;
     fullcanisters = floor(liters / canistersize);
     leftover = liters % canistersize;
 
@@ -209,12 +209,16 @@ void confirmOrder(void){
     is_digit = scanf("%d", &answer);
     cleanBuffer();
     while(!is_true){
-        if(answer == 1){
-            printf("\nThe canisters will be filled as soon as we receive your payment.\n");
-            printf("Thank you for using the juice filling machine calculator!\n");
-            is_true = 1;
-        }else if(answer == 2){
-            is_true = 1;
+        if(is_digit){
+            if(answer == 1 || answer == 2){
+                printf("\nThe canisters will be filled as soon as we receive your payment.\n");
+                printf("Thank you for using the juice filling machine calculator!\n");
+                is_true = 1;
+            }else{
+                printf("Invalid input! Please choose a valid option.\n");
+                is_digit = scanf("%d", &answer);
+                cleanBuffer();
+            }
         }else{
             printf("Invalid input! Please choose a valid option.\n");
             is_digit = scanf("%d", &answer);
